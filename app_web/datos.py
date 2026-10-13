@@ -24,13 +24,18 @@ def listado_de_estaciones (registros):
         estaciones.add(registro["estacion"])
     return sorted(estaciones)
 
+def listado_de_mediciones():
+    resultado = []
+    for clave in mediciones:
+        resultado.append(clave)
+    return resultado
+
 def construir_fecha(registro):
     fecha = datetime.strptime(registro["fecha"], "%d%m%Y")
     return fecha.replace(hour = registro["hora"], minute = 0, second = 0)
 
 def obtener_fecha(filtrado):
     return filtrado["fecha_hora"]
-
 
 def filtrar_datos(registros, estacion, medicion):
     if medicion not in mediciones:
@@ -58,11 +63,11 @@ def guardar_csv(filtrados, estacion, medicion, carpeta_salidas = "salidas"):
         os.makedirs(carpeta_salidas)
 
     hoy = datetime.now().strftime("%Y-%m-%d")
-    slug = estacion.lower().replace(" ", "_")
+    estaciones = estacion.lower().replace(" ", "_")
 
     ruta_csv = os.path.join(
         carpeta_salidas,
-        f"{hoy}_{slug}_{medicion}.csv"
+        f"{hoy}_{estaciones}_{medicion}.csv"
     )
     
     with open(ruta_csv, "w", newline="", encoding="utf-8") as archivo:
