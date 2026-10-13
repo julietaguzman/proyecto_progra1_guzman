@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 import matplotlib.pyplot as plt
 
-def generar_slug(texto):
+def normalizar_texto(texto):
     return texto.lower().replace(" ", "_")
 
 def generar_grafica(filtrados, estacion, medicion, carpeta_salidas = "salidas"):
@@ -10,8 +10,8 @@ def generar_grafica(filtrados, estacion, medicion, carpeta_salidas = "salidas"):
         os.makedirs(carpeta_salidas)
 
     hoy = datetime.now().strftime("%Y-%m-%d")
-    slug = generar_slug(estacion)
-    nombre_archivo = f"{hoy}_{slug}_{medicion}.png"
+    estacion_normalizada = normalizar_texto(estacion)
+    nombre_archivo = f"{hoy}_{estacion_normalizada}_{medicion}.png"
     ruta_png = os.path.join(carpeta_salidas, nombre_archivo)
 
     x = []
