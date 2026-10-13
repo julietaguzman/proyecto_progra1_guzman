@@ -19,7 +19,7 @@ def main():
     st.write("Elegí una estación y una medición para ver estadísticas y gráficos.")
 
     if len(sys.argv) < 2:
-        st.error("Uso: streamlit run app.py -- <ruta_json>")
+        st.error("Uso: streamlit run app.py <ruta_json>")
         st.stop()
 
     ruta_json = sys.argv[-1]
